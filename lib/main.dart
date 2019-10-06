@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,6 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: MyHomePage(),
     );
   }
@@ -23,29 +27,29 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.white,
+        color: Colors.blue,
+        height: 55.0,
+        animationDuration: Duration(
+          milliseconds: 200,
+        ),
+        items: <Widget>[
+          Icon(Icons.home, size: 30,color: Colors.white,),
+          Icon(Icons.map, size: 30,color: Colors.white,),
+          Icon(Icons.list, size: 30,color: Colors.white,),
+          Icon(Icons.help, size: 30,color: Colors.white,),
+        ],
+        onTap: (index) {
+          //Handle button tap
+        },
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
-          const SliverAppBar(
-            pinned: true,
-            expandedHeight: 250.0,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text('First'),
-              centerTitle: true,
-            ),
-          ),
-          SliverFixedExtentList(
-            itemExtent: 50.0,
-            delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.lightBlue[100 * (index % 9)],
-                  child: Text('List Item $index'),
-                );
-              },
-              childCount: 20,
-            ),
-          ),
+          SliverAppBar(
+            title: Text('Home'),
+            expandedHeight: 200.0,
+          )
         ],
       ),
     );
